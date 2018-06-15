@@ -1,6 +1,6 @@
 
 let properties = {
-		line : window.innerHeight || document.body.clientHeigh,
+		line : window.innerHeight || document.body.clientHeight,
 		column : window.innerWidth || document.body.clientWidth,
 		tabs : 4
 }
@@ -31,4 +31,12 @@ $('.nav').append('<ul>'+
         '<li><a href="#">Preferences</a></li>'+
         '<li><a href="#">Help</a></li>'+
       '</ul>');
+
+$('.child').resizable({
+    handles: 'w,e',
+    minWidth: 60,
+    maxWidth: window.innerWidth - 60
+});
+
+// $('.nav-tab').append('<br><span style="font-weight:bold;color:white;font-family:calibri;">FOLDERS</span>');
 

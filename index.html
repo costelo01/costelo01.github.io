@@ -9,9 +9,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="manifest" href="site.webmanifest">
-  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="apple-touch-icon" href="chess_piece_knight.png">
   <!-- Place favicon.ico in the root directory -->
-
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
 
@@ -24,18 +24,17 @@
   <![endif]-->
 
   <!-- Add your site or application content here -->
-  <header>
-    <div class = 'window'></div>
-    <div class = 'nav'></div>
-  </header>
+<header>
+  <div class = 'window'></div>
+  <div class = 'nav'></div>
+</header>
 
-    <div class = 'content'>
+    <div class = 'parent'>
+      <div class = 'child'>
       
-      <span style="font-weight:bold;color:white;font-family: calibri;">FOLDERS</span>
-
-
-
+      </div>
     </div>
+
 
 
 
@@ -43,6 +42,8 @@
 
   <script src="js/vendor/modernizr-3.6.0.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
@@ -58,7 +59,7 @@
       $(function() {
         if (!Modernizr.cssvhunit) {
           var windowH = $(window).height();
-          $('#your-object').css({'height':($(window).height())+'px'});
+          $('.parent').css({'height':($(window).height())+'px'});
           }
       });
 
@@ -66,5 +67,4 @@
 
 
 </body>
-
 </html>
