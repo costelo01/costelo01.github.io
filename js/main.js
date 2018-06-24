@@ -8,7 +8,7 @@ $('.window').html("<span id='text'><img width = '20' height = '20'"+
 //dropdown menu
 $('.nav').html('<ul id ="nav">'+
         '<li><a>File</a><div class="dropdown-content" id="File">'+
-            ' </div></li><li><a>Edit</a><div class="dropdown-content" id="Edit"><span class="space"></span>'+
+            ' </div></li><li><a>Edit</a><div class="dropdown-content" id="Edit">'+
             ' </div></li>'+
         '<li><a>Selection</a><div class="dropdown-content" id="Selection">'+
             ' </div></li>'+
@@ -66,12 +66,6 @@ $('.child').resizable({
 });
 
 
-$.each(dropdown_ , function(key, value){
-    //
-
-    //console.log()
-})
-
 //tab menu
 for(let i in dropdown_){
     const key = [];
@@ -81,11 +75,12 @@ for(let i in dropdown_){
         continue;
     }
     for(let o in dropdown_[i]){
-        key.push('<span class="key">'+o+'</span><span class="value">'+dropdown_[i][o]+'<span>','<br>')
+        key.push('<div id="s"><span class="space"></span><span class="key">'+o+'</span>'+
+          '<span class="value">'+dropdown_[i][o]+'<span></div>')
         value.push(dropdown_[i][o])
     }
      $('#'+i).html(key)
-     $('#'+i).css('padding','5px')
+     //$('#'+i).css('padding-left','35px')
      
 }
 
