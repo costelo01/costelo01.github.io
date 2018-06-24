@@ -1,22 +1,8 @@
-
-let properties = {
-		line : window.innerHeight || document.body.clientHeight,
-		column : window.innerWidth || document.body.clientWidth,
-		tabs : 4
-}
-
-let behaviors = {	
-
-
-}
-
-
-let arrayLength = [[],[]]
-
+//render partials
 //window
 $('.window').html("<span id='text'><img width = '20' height = '20'"+
-	"src='https://ih1.redbubble.net/image.428914186.0177/flat,800x800,075,f.u1.jpg'> &nbsp"+ 
-	"C:Users\\Aj\\Desktop\\p\\index.html (p) - Sublime Text (UNREGISTERED)</span>");
+  "src='https://ih1.redbubble.net/image.428914186.0177/flat,800x800,075,f.u1.jpg'> &nbsp"+ 
+  "C:Users\\Aj\\Desktop\\p\\index.html (p) - Sublime Text (UNREGISTERED)</span>");
 
 
 //dropdown menu
@@ -42,22 +28,49 @@ $('.nav').html('<ul id ="nav">'+
             ' </div></li>'+
       '</ul>');
 
+//content
+$('.content').html('<div class = "parent">'+
+       '<span style="position: absolute;'+
+          'left: 0px;'+
+          'top: 0px;'+
+          'color: white;'+
+          'z-index: -1;">Folders</span>'+
+      '<div class = "child">'+
+        '<center>'+
+        '<img width="50%" height="50%" src="http://news.sunybroome.edu/buzz/wp-content/uploads/sites/2/2017/11/under-construction-2408060_960_720.png">'+
+        '</center>'+
+      '</div>'+
+    '</div>');
+
+
+let properties = {
+		line : window.innerHeight || document.body.clientHeight,
+		column : window.innerWidth || document.body.clientWidth,
+		tabs : 4
+}
+
+let behaviors = {	
+
+
+}
+
+
+let arrayLength = [[],[]]
+
+
+
 $('.child').resizable({
     handles: 'w',
-    minWidth: 60,
-    maxWidth: document.body.clientWidth - 60
+    minWidth: 55,
+    maxWidth: window.innerWidth - 55
 });
 
 
 $.each(dropdown_ , function(key, value){
-   
-
     //
 
     //console.log()
 })
-
-    
 
 //tab menu
 for(let i in dropdown_){
@@ -68,10 +81,11 @@ for(let i in dropdown_){
         continue;
     }
     for(let o in dropdown_[i]){
-        key.push(o,'<br>')
+        key.push('<span class="key">'+o+'</span><span class="value">'+dropdown_[i][o]+'<span>','<br>')
         value.push(dropdown_[i][o])
     }
-     $('#'+i).html(key);
+     $('#'+i).html(key)
+     $('#'+i).css('padding','5px')
      
 }
 
