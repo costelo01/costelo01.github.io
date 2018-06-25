@@ -37,7 +37,7 @@ $('.content').html('<div class = "parent">'+
           'z-index: -1;">Folders</span>'+
       '<div class = "child">'+
         '<center>'+
-        '<img width="50%" height="50%" src="http://news.sunybroome.edu/buzz/wp-content/uploads/sites/2/2017/11/under-construction-2408060_960_720.png">'+
+        '<img width="50%" height="50%" src="">'+
         '</center>'+
       '</div>'+
     '</div>');
@@ -51,12 +51,9 @@ let properties = {
 
 let behaviors = {	
 
-
 }
 
-
 let arrayLength = [[],[]]
-
 
 
 $('.child').resizable({
