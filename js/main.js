@@ -30,17 +30,55 @@ $('.nav').html('<ul id ="nav">'+
 
 //content
 $('.content').html('<div class = "parent">'+
-       '<span style="position: absolute;'+
+       '<div style="position: absolute;'+
           'left: 0px;'+
           'top: 0px;'+
-          'color: white;'+
-          'z-index: -1;">Folders</span>'+
+          'color: #b7b7b7;'+
+          'z-index: -1;">Folders'+
+      
+              '<div class="file-folder" style="z-index: -1;">p</div>'+  //file folder
+
+
+              '</div>'+
+
       '<div class = "child">'+
-        '<center>'+
-        '<img width="50%" height="50%" src="">'+
-        '</center>'+
+           '<div class="tab"><div class="code-content"></div></div>'+
       '</div>'+
     '</div>');
+
+
+
+
+$('#nav > li > a').on('click focus', function(){
+
+  var period_val = $(this).text();
+
+  $('#'+period_val).css( "display", "block" );
+
+  $('#nav > li ').mouseover(function() {
+    $(this).find(" > div").css( "display", "block" );
+    }).mouseout(function() {
+      $(this).find(" > div").css( "display", "none" );
+
+
+  });
+
+  $(this).on('dblclick ', function(){
+
+    $('#'+period_val).css( "display", "none" );
+
+    $('#nav > li ').mouseover(function() {
+       $(this).find(" > div").css( "display", "none" );
+    })
+
+
+  })
+
+
+
+  
+});
+
 
 
 let properties = {
@@ -85,4 +123,7 @@ for(let i in dropdown_){
 // $('.nav-tab').append('<br><span style="font-weight:bold;color:white;font-family:calibri;">FOLDERS</span>');
 
 
-
+// $('.key').on('click', function () {
+//     if($(this).text() == 'Exit')
+          
+// });
