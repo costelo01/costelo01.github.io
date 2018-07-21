@@ -242,24 +242,40 @@ hr {margin-right: 3px; margin-bottom: -22px; margin-top: -17px;}
 
 .value {float: right; padding-right: 20px; }
 .key {padding-right: 65px; padding-left: 5px; }
- #s {padding-bottom: 1px; padding-top: 1px; border: 1px solid transparent;} 
+ .s {padding-bottom: 1px; padding-top: 1px; border: 1px solid transparent;} 
 
-#s:hover {background-color: #cef6ff;
+.s:hover {background-color: #cef6ff;
     border: 0.5px solid #1a79e0; cursor: context-menu;}
 
 .space {border-left: 1px solid #ccc; margin: 0; padding-bottom: 5.5px;}
 
-#s:hover > .key > .line {background-color: transparent; border: 0px solid transparent;}
+.s:hover > .key > .line {background-color: transparent; border: 0px solid transparent;}
 
 
-p {font-family: Consolas; font-size: 12px; color:#d6d6d1; text-transform: lowercase;
+p {font-family: Segoe UI; font-size: 13px; color:#e5e5e0; text-transform: lowercase;
 font-weight: normal; background-color: transparent; border: 1px solid transparent; width: 200vh !important; 
 top: 0; bottom: 0; margin: 2px; padding-left: 30px; }
 
 p:hover {  cursor:context-menu; background-color: #272822; }
 
-.icoo { font-size: 15px;color: gray; }
-.
+.icoo { font-size: 16px;color: gray; }
+
+.custom-menu {
+  
+    padding-left: 32px;
+    padding-top: 0px;
+    padding-bottom: 5px;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    font-family: Segoe UI;
+    font-size: 13px;
+    border: 1px solid gray;
+   
+}
+
+.mainfolder {padding-left: 15px;}
+
 
 /* ==========================================================================
    Helper classes

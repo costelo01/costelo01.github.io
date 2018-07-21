@@ -2,7 +2,7 @@
 //window
 jQuery('.window').html("<span id='text'><img width = '20' height = '20'"+
 "src='https://ih1.redbubble.net/image.428914186.0177/flat,800x800,075,f.u1.jpg'> &nbsp"+ 
-"C:Users\\Aj\\Desktop\\p\\index.html (p) - Sublime Text (UNREGISTERED)</span>");
+"C:Users\\Aj\\Desktop\\costelo01.github.io\\index.html (costelo01.github.io) - Sublime Text (UNREGISTERED)</span>");
 
 
 //dropdown menu
@@ -72,8 +72,6 @@ jQuery('#nav > li > a').on('click focus', function(){
 
 });
 
-
-
 let properties = {
 		line : window.innerHeight || document.body.clientHeight,
 		column : window.innerWidth || document.body.clientWidth,
@@ -112,14 +110,13 @@ for(let i in dropdown_){
         continue;
     }
     for(let o in dropdown_[i]){
-        key.push('<div id="s"><span class="space"></span><span class="key">'+o+'</span>'+
+        key.push('<div class="s"><span class="space"></span><span class="key">'+o+'</span>'+
           '<span class="value">'+dropdown_[i][o]+'<span></div>')
         value.push(dropdown_[i][o])
     }
      jQuery('#'+i).html(key)
      
 }
-
 
 const file_icons = {
 
@@ -135,22 +132,29 @@ const file_icons = {
 }
 
 const function__ = {
-
   folder_c : {"New File" : "",
   "Rename...": "",
   "<span class='line'><hr></span>": "",
   "New Folder": "",
   "Delete Folder": "","Find in Folder...": ""},
-
   file_c : {"Rename...": "","Delete File": "","Open Containing Folder...": ""},
+  folder :  function(arg){
+    const ar = [];
 
-  folder :  function(){
+    for(let i in function__.folder_c){
+        ar.push('<div class="s"><span class="space"><span class="key">'+i+'</span></div>')
+    }
+      jQuery(arg).on('contextmenu', function(){
+        $(this).bind("contextmenu",function(event) { 
+               
+          $("<div class='custom-menu'></div>").append(ar)
 
-    
+               .appendTo(".child")
+               .css({top: event.pageY + "px", left: event.pageX + "px"});
 
-
+          })
+      })
   },
-
   file:  function(){
 
 
@@ -185,22 +189,20 @@ let ksort = function ( src ) {
 };
 
 
-for(let i in ksort(folders_files)){
+jQuery('.file-folder').append('<p class="binded-event mainfolder"> <span class="icoo">'+file_icons.folder+'</span> &nbspcostelo01.github.io</p>');
 
+for(let i in ksort(folders_files)){
   if (!folders_files.hasOwnProperty(i)) {
           continue;
   }
-
-  jQuery('.file-folder').append('<p><span class="icoo">'+file_icons.folder+'</span> '+i+'</p>')
-
+  jQuery('.file-folder').append('<p class="binded-event">  <span class="icoo">'+file_icons.folder+'</span> &nbsp'+i+'</p>')
+  
   for(let o in ksort(folders_files[i])){
       
   }
-  
 }
 
-
-
+function__.folder('.binded-event')
 
 
 
