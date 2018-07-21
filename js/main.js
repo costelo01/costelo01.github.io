@@ -1,3 +1,9 @@
+
+//First of all, I want to have my js optimized. So seperation-of-concern was not applied here...
+// Cheers!
+
+
+
 //render partials
 //window
 jQuery('.window').html("<span id='text'><img width = '20' height = '20'"+
@@ -45,9 +51,6 @@ jQuery('.content').html('<div class = "parent">'+
 
 
 
-jQuery('.file-folder').html('<span></span>');
-
-
 
 
 jQuery('#nav > li > a').on('click focus', function(){
@@ -84,7 +87,7 @@ let behaviors = {
 
 let arrayLength = [[],[]]
 
-
+//resizable child just like in the Sublime!
 jQuery('.child').resizable({
     handles: 'w',
     minWidth: 55,
@@ -138,19 +141,26 @@ const function__ = {
   "New Folder": "",
   "Delete Folder": "","Find in Folder...": ""},
   file_c : {"Rename...": "","Delete File": "","Open Containing Folder...": ""},
-  folder :  function(arg){
+  folder :  function(arg){ 
     const ar = [];
 
     for(let i in function__.folder_c){
         ar.push('<div class="s"><span class="space"><span class="key">'+i+'</span></div>')
     }
+
+      //Right click function for folders
       jQuery(arg).on('contextmenu', function(){
         $(this).bind("contextmenu",function(event) { 
-               
+
+          //Got the code from this dude: https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app
           $("<div class='custom-menu'></div>").append(ar)
 
-               .appendTo(".child")
+               .appendTo("body")
                .css({top: event.pageY + "px", left: event.pageX + "px"});
+
+          }).bind("click" , function(){
+
+              $('.child').children(".custom-menu").remove();
 
           })
       })
@@ -161,7 +171,6 @@ const function__ = {
 
 
   }
-  
 }
 
 
@@ -171,9 +180,7 @@ let folders_files = {
     "img" : {},
     "css" : {},
     "js" : {}
-
 }
-
 
 // sort algo: https://stackoverflow.com/questions/5467129/sort-javascript-object-by-key
 let ksort = function ( src ) {
@@ -189,13 +196,14 @@ let ksort = function ( src ) {
 };
 
 
-jQuery('.file-folder').append('<p class="binded-event mainfolder"> <span class="icoo">'+file_icons.folder+'</span> &nbspcostelo01.github.io</p>');
+jQuery('.file-folder').append('<p class="binded-event mainfolder toggle"> <span class="icoo">'+file_icons.folder+'</span> &nbspcostelo01.github.io</p>'+
+  '<div class="accordion-content.default"><p>Lorem ipsum dolor sit amet mauris eu turpis.</p></div>');
 
 for(let i in ksort(folders_files)){
   if (!folders_files.hasOwnProperty(i)) {
           continue;
   }
-  jQuery('.file-folder').append('<p class="binded-event">  <span class="icoo">'+file_icons.folder+'</span> &nbsp'+i+'</p>')
+  jQuery('.file-folder').append('<p class="binded-event toggle">  <span class="icoo">'+file_icons.folder+'</span> &nbsp'+i+'</p>')
   
   for(let o in ksort(folders_files[i])){
       
@@ -204,6 +212,16 @@ for(let i in ksort(folders_files)){
 
 function__.folder('.binded-event')
 
+
+jQuery('.file-folder').find('.toggle').click(function(){
+
+       //Expand or collapse this panel
+      $(this).next().slideToggle('fast');
+
+      //Hide the other panels
+      // $(".accordion-content").not($(this).next()).slideDown('fast');
+
+    });
 
 
 // $('.key').on('click', function () {

@@ -157,11 +157,11 @@ footer{
 }
 .window {
     margin-bottom: -1px;
-    background-color: #1a79e0; 
+    background-color: #f2eeea; 
    
 }   
 #text {
-    color: white;
+    color: black;
     font-size: 13px;
     font-family: Segoe UI;
 }
@@ -275,6 +275,10 @@ p:hover {  cursor:context-menu; background-color: #272822; }
 }
 
 .mainfolder {padding-left: 15px;}
+
+.toggle {cursor: pointer;}
+  .accordion-content {display: none;}
+  .accordion-content.default {display: block;}
 
 
 /* ==========================================================================
