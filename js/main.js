@@ -6,12 +6,14 @@
 
 //render partials
 //window
+
 jQuery('.window').html("<span id='text'><img width = '20' height = '20'"+
 "src='https://ih1.redbubble.net/image.428914186.0177/flat,800x800,075,f.u1.jpg'> &nbsp"+ 
 "C:Users\\Aj\\Desktop\\costelo01.github.io\\index.html (costelo01.github.io) - Sublime Text (UNREGISTERED)</span>");
 
 
 //dropdown menu
+
 jQuery('.nav').html('<ul id ="nav">'+
 '<li><a>File</a><div class="dropdown-content" id="File">'+
 '</div></li><li><a>Edit</a><div class="dropdown-content" id="Edit">'+
@@ -75,24 +77,31 @@ jQuery('#nav > li > a').on('click focus', function(){
 
 });
 
-let properties = {
+let properties = {  //hope I can use this somewhere
 		line : window.innerHeight || document.body.clientHeight,
 		column : window.innerWidth || document.body.clientWidth,
 		tabs : 4
 }
 
-let behaviors = {	
+let me_add_something = {	
+
+}
+
+let me_delete_something = {
 
 }
 
 let arrayLength = [[],[]]
 
 //resizable child just like in the Sublime!
+
 jQuery('.child').resizable({
     handles: 'w',
     minWidth: 55,
     maxWidth: window.innerWidth - 65
 });
+
+//window objects
 
 const dropdown_={File:{"New File":"Ctrl+N","Open File...":"Ctrl+O","Open Folder...":"","Open Recent":[],"Reopen with Encoding":[],"New View into File":"",Save:"","Save with Encoding":"","Save As...":"Ctrl+Shift+S","Save All":"","<span class='line'><hr></span>":"","New Window":"Ctrl+Shift+N","Close Window":"Ctrl+Shift+W","<span class='line1'><hr></span>":"","Close File":"Ctrl+W","Revert File":"","Close All Files":"","<span class='line2'><hr></span>":"",Exit:""},Edit:{"Undo Insert Characters":"Ctrl+Z",
 "Repeat Insert Character":"Ctrl+Y","Undo Selection":[],"<span class='line'><hr></span>":"",Copy:"",Cut:"",Paste:"","Paste and Indent":"","Paste from History":"","<span class='line1'><hr></span>":"",Line:"",Comment:"",Text:"",Tag:"","Code Folding":"","Convert Case":"",Wrap:"","Show Completions":"Ctrl+Space","<span class='line2'><hr></span>":"","Sort Lines":"","Sort Lines (Case Sensitive)":"","Permute Lines":"","Permute Selections":""},Selection:{"Split into Lines":"Ctrl+Shift+L","Add Previous Line":"Ctrl+Alt+Up",
@@ -127,12 +136,20 @@ const file_icons = {
   js : '<i class="fab fa-js"></i>',
   dotfiles : "",
   txtfiles : "",
-  image : '<i class="far fa-image"></i>',
-  markup : '<i class="fas fa-code"></i>',
+  png : '<i class="far fa-image"></i>',
+  jpg : '<i class="far fa-image"></i>',
+  html : '<i class="fas fa-code" style="font-size: 12px;"></i>',
+  xml : '<i class="fas fa-code" style="font-size: 12px;"></i>',
   manifest: "",
   folder : '<i class="far fa-folder"></i>'
   
 }
+
+
+
+
+
+//<---- SIDEBAR FUNCTIONS PART I !! ----->
 
 const function__ = {
   folder_c : {"New File" : "",
@@ -155,42 +172,40 @@ const function__ = {
     }
 
       //Right click function for folders
+
       jQuery(arg).on('contextmenu', function(){
         jQuery(this).bind("contextmenu",function(event) { 
            jQuery('.custom-menu').not(this).hide();
-          //Got the code from this dude: https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app
-          jQuery("<div class='custom-menu'></div>").append(ar)
 
+          //Got the code from this dude: https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app
+          
+          jQuery("<div class='custom-menu'></div>").append(ar)
                .appendTo("body")
                .css({top: event.pageY + "px", left: event.pageX + "px"});
-
           }).bind("click" , function(){
-
               jQuery('.custom-menu').not(this).hide();
-
           })
       })
   },
   file:  function(arg){
 
-
     jQuery("body").on("click", function(){
         jQuery('.custom-menu').hide()
     })
 
-
-
     const ar = [];
+
     for(let i in function__.file_c){
         ar.push('<div class="s"><span class="space"><span class="key">'+i+'</span></div>')
     }
 
       //Right click function for folders
+
       jQuery(arg).on('contextmenu', function(){
 
         jQuery(this).bind("contextmenu",function(event) { 
-          jQuery('.custom-menu').not(this).hide();
 
+          jQuery('.custom-menu').not(this).hide();
           jQuery("<div class='custom-menu'></div>").append(ar)
 
                .appendTo("body")
@@ -202,9 +217,18 @@ const function__ = {
 
           })
       })
+  },
+  delete : function(){
+
+
+  },
+  add : function(){
+
 
   }
 }
+
+//<!---- END OF SIDEBAR FUNCTIONS PART I---->
 
 // change this on your own preferences of files 
 
@@ -212,11 +236,12 @@ let folders_files = {
 
     "me" : {"school.js": "","achievements.php": "","life.html":""}, 
     "img" : {"baki.png": ""},
-    "css" : {},
-    "js" : {}
+    "css" : { },
+    "js_" : { }
 }
 
 // sort algo: https://stackoverflow.com/questions/5467129/sort-javascript-object-by-key
+
 let ksort = function ( src ) {
       var keys = Object.keys( src ),
           target = {};
@@ -230,38 +255,63 @@ let ksort = function ( src ) {
 };
 
 
-jQuery('.file-folder').append('<p class="binded-event mainfolder toggle"> <span class="icoo">'+file_icons.folder+'</span> &nbspcostelo01.github.io</p>'+
-  '<div class="accordion-content.default"><p>Lorem ipsum dolor sit amet mauris eu turpis.</p></div>');
+//<!--- sidebar functions part II again --->
 
+var spe_arrow_default = '▸';
+var spe_arrow_active = '▾';
+
+jQuery('<p class="binded-event mainfolder toggle">'+spe_arrow_active+' <span class="icoo">'+file_icons.folder+'</span> &nbspcostelo01.github.io</p>').appendTo('.file-folder')
+
+var c;
+var icon;
 
 for(let i in ksort(folders_files)){
   const fol = []
   if (!folders_files.hasOwnProperty(i)) {
           continue;
   }
-  
+
+    //icon - file formatting
     for(let o in ksort(folders_files[i])){
-        fol.push('<div id ="'+i+'" style="padding-left: 15px;"><p class="toggle bind-event">'+o+'<p></div>')
+      if(o == null){
+        continue;
+      }
+       var a = o.split('.')
+        for(let something in file_icons){
+          if(a[1] == something){
+              icon = file_icons[something]
+          }
+        }
+    
+      fol.push('<div style="padding-left: 30px;"><p class="toggle subfolder bind-event '+i+'"><span class="">'+icon+'</span> &nbsp'+o+'<p></div>')
+         
     }
 
-    jQuery('.file-folder').append('<p class="binded-event toggle"><span class="icoo">'+file_icons.folder+'</span> &nbsp'+i+'</p>')
+    jQuery('<p id="'+i+'" class="binded-event toggle subfolder">'+spe_arrow_active+' <span class="icoo">'+file_icons.folder+'</span> &nbsp'+i+'</p>').appendTo('.file-folder')
+   
     jQuery('.file-folder').append(fol)
-
-
-
-    jQuery('.file-folder').find('.toggle').click(function(){
-
-       //Expand or collapse this panel
-      //  $(this).slideToggle('fast');
-
-      //Hide the other panels
-     // $(".accordion-content").not($(this).next()).slideDown('fast');
-
-    });
 
 }
 
+jQuery('.file-folder').find('.toggle').click(function(){
+
+     //Expand or collapse this panel
+
+     var a = jQuery(this).attr('id')
+     spe_arrow_default = spe_arrow_active;
+     jQuery('.'+a).slideToggle(50,'linear')
+
+});
+
+jQuery('.file-folder').find('.mainfolder').click(function(){
+     jQuery('.subfolder').slideToggle(50,'linear');
+     spe_arrow_default = spe_arrow_active;
+});
+
+
 function__.folder('.binded-event')
 function__.file('.bind-event')
+
+//<!--- end of sidebar functions part II --->
 
 
