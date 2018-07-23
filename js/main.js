@@ -142,6 +142,12 @@ const function__ = {
   "Delete Folder": "","Find in Folder...": ""},
   file_c : {"Rename...": "","Delete File": "","Open Containing Folder...": ""},
   folder :  function(arg){ 
+
+    jQuery("body").on("click", function(){
+        jQuery('.custom-menu').hide()
+    })
+
+
     const ar = [];
 
     for(let i in function__.folder_c){
@@ -150,34 +156,62 @@ const function__ = {
 
       //Right click function for folders
       jQuery(arg).on('contextmenu', function(){
-        $(this).bind("contextmenu",function(event) { 
-
+        jQuery(this).bind("contextmenu",function(event) { 
+           jQuery('.custom-menu').not(this).hide();
           //Got the code from this dude: https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app
-          $("<div class='custom-menu'></div>").append(ar)
+          jQuery("<div class='custom-menu'></div>").append(ar)
 
                .appendTo("body")
                .css({top: event.pageY + "px", left: event.pageX + "px"});
 
           }).bind("click" , function(){
 
-              $('.child').children(".custom-menu").remove();
+              jQuery('.custom-menu').not(this).hide();
 
           })
       })
   },
-  file:  function(){
+  file:  function(arg){
+
+
+    jQuery("body").on("click", function(){
+        jQuery('.custom-menu').hide()
+    })
 
 
 
+    const ar = [];
+    for(let i in function__.file_c){
+        ar.push('<div class="s"><span class="space"><span class="key">'+i+'</span></div>')
+    }
+
+      //Right click function for folders
+      jQuery(arg).on('contextmenu', function(){
+
+        jQuery(this).bind("contextmenu",function(event) { 
+          jQuery('.custom-menu').not(this).hide();
+
+          jQuery("<div class='custom-menu'></div>").append(ar)
+
+               .appendTo("body")
+               .css({top: event.pageY + "px", left: event.pageX + "px"});
+
+          }).bind("click" ,function(){
+
+              jQuery('.custom-menu').not(this).hide();
+
+          })
+      })
 
   }
 }
 
+// change this on your own preferences of files 
 
 let folders_files = {
 
     "me" : {"school.js": "","achievements.php": "","life.html":""}, 
-    "img" : {},
+    "img" : {"baki.png": ""},
     "css" : {},
     "js" : {}
 }
@@ -199,32 +233,35 @@ let ksort = function ( src ) {
 jQuery('.file-folder').append('<p class="binded-event mainfolder toggle"> <span class="icoo">'+file_icons.folder+'</span> &nbspcostelo01.github.io</p>'+
   '<div class="accordion-content.default"><p>Lorem ipsum dolor sit amet mauris eu turpis.</p></div>');
 
+
 for(let i in ksort(folders_files)){
+  const fol = []
   if (!folders_files.hasOwnProperty(i)) {
           continue;
   }
-  jQuery('.file-folder').append('<p class="binded-event toggle">  <span class="icoo">'+file_icons.folder+'</span> &nbsp'+i+'</p>')
   
-  for(let o in ksort(folders_files[i])){
-      
-  }
-}
+    for(let o in ksort(folders_files[i])){
+        fol.push('<div id ="'+i+'" style="padding-left: 15px;"><p class="toggle bind-event">'+o+'<p></div>')
+    }
 
-function__.folder('.binded-event')
+    jQuery('.file-folder').append('<p class="binded-event toggle"><span class="icoo">'+file_icons.folder+'</span> &nbsp'+i+'</p>')
+    jQuery('.file-folder').append(fol)
 
 
-jQuery('.file-folder').find('.toggle').click(function(){
+
+    jQuery('.file-folder').find('.toggle').click(function(){
 
        //Expand or collapse this panel
-      $(this).next().slideToggle('fast');
+      //  $(this).slideToggle('fast');
 
       //Hide the other panels
-      // $(".accordion-content").not($(this).next()).slideDown('fast');
+     // $(".accordion-content").not($(this).next()).slideDown('fast');
 
     });
 
+}
 
-// $('.key').on('click', function () {
-//     if($(this).text() == 'Exit')
-          
-// });
+function__.folder('.binded-event')
+function__.file('.bind-event')
+
+
