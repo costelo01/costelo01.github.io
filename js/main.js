@@ -2,14 +2,14 @@
 //First of all, I want to have my js optimized. So seperation-of-concern was not applied here...
 // Cheers!
 
-
+var vard = 'index.html'
 
 //render partials
 //window
 
 jQuery('.window').html("<span id='text'><img width = '20' height = '20'"+
 "src='https://ih1.redbubble.net/image.428914186.0177/flat,800x800,075,f.u1.jpg'> &nbsp"+ 
-"C:Users\\Aj\\Desktop\\costelo01.github.io\\index.html (costelo01.github.io) - Sublime Text (UNREGISTERED)</span>");
+"C:Users\\Aj\\Desktop\\costelo01.github.io\\"+vard+" (costelo01.github.io) - Sublime Text (UNREGISTERED)</span>");
 
 
 //dropdown menu
@@ -37,7 +37,7 @@ jQuery('.nav').html('<ul id ="nav">'+
 '</ul>');
 
 //content
-jQuery('.content').html('<div class = "parent">'+
+jQuery('.content').html('<div class = "parent" >'+
 '<div style="position: absolute;'+
 'left: 0px;'+
 'top: 10px;'+
@@ -47,7 +47,7 @@ jQuery('.content').html('<div class = "parent">'+
 '<div class="file-folder" style="z-index: -1;"></div>'+  //file folder
 '</div>'+
 '<div class = "child">'+
-'<div class="tab"><div class="code-content"></div></div>'+
+'<div ><div class="code-content"></div></div>'+
 '</div>'+
 '</div>');
 
@@ -141,7 +141,8 @@ const file_icons = {
   html : '<i class="fas fa-code" style="font-size: 12px;"></i>',
   xml : '<i class="fas fa-code" style="font-size: 12px;"></i>',
   manifest: "",
-  folder : '<i class="far fa-folder"></i>'
+  folder : '<i class="far fa-folder"></i>',
+  folder_o : '<i class="far fa-folder-open"></i>'
   
 }
 
@@ -260,7 +261,7 @@ let ksort = function ( src ) {
 var spe_arrow_default = '▸';
 var spe_arrow_active = '▾';
 
-jQuery('<p class="binded-event mainfolder toggle">'+spe_arrow_active+' <span class="icoo">'+file_icons.folder+'</span> &nbspcostelo01.github.io</p>').appendTo('.file-folder')
+jQuery('<p class="binded-event mainfolder toggle"><span class="arrow" style="font-size: 18px;"></span>&nbsp<span class="icoo">'+file_icons.folder+'</span> &nbspcostelo01.github.io</p>').appendTo('.file-folder')
 
 var c;
 var icon;
@@ -287,25 +288,51 @@ for(let i in ksort(folders_files)){
          
     }
 
-    jQuery('<p id="'+i+'" class="binded-event toggle subfolder">'+spe_arrow_active+' <span class="icoo">'+file_icons.folder+'</span> &nbsp'+i+'</p>').appendTo('.file-folder')
+    jQuery('<p id="'+i+'" class="binded-event toggle subfolder"><span class="arrow" style="font-size: 18px;"></span>&nbsp<span class="icoo">'+file_icons.folder+'</span> &nbsp'+i+'</p>').appendTo('.file-folder')
    
     jQuery('.file-folder').append(fol)
 
 }
 
+
+(jQuery('.toggle').is(':visible') || jQuery('.subfolder').is(':visible')) ? jQuery('.arrow').html(spe_arrow_active)  : jQuery('.arrow').html(spe_arrow_default)
+//(jQuery('.toggle').is(':visible') || jQuery('.subfolder').is(':visible')) ? jQuery('.icoo').html(file_icons.folder_o)  : jQuery('.icoo').html(file_icons.folder)    
+
+//(arrow^active) formatting    
+
 jQuery('.file-folder').find('.toggle').click(function(){
 
      //Expand or collapse this panel
-
      var a = jQuery(this).attr('id')
-     spe_arrow_default = spe_arrow_active;
-     jQuery('.'+a).slideToggle(50,'linear')
+    if (jQuery('.'+a).is(':visible')){
+      jQuery(this).find('.arrow').html(spe_arrow_default)
+      jQuery(this).find('.icoo').html(file_icons.folder)
+    }
+    else{
+      jQuery(this).find('.arrow').html(spe_arrow_active)
+      jQuery(this).find('.icoo').html(file_icons.folder_o)
+    }
+
+jQuery('.'+a).slideToggle(50,'linear')
 
 });
 
 jQuery('.file-folder').find('.mainfolder').click(function(){
-     jQuery('.subfolder').slideToggle(50,'linear');
-     spe_arrow_default = spe_arrow_active;
+
+      if (jQuery('.subfolder').is(':visible')){
+
+        jQuery(this).find('.arrow').html(spe_arrow_default)
+        jQuery(this).find('.icoo').html(file_icons.folder)
+      }
+
+      else{
+        
+        jQuery(this).find('.arrow').html(spe_arrow_active)
+        jQuery(this).find('.icoo').html(file_icons.folder_o)
+      }
+
+jQuery('.subfolder').slideToggle(50,'linear')
+
 });
 
 
