@@ -9,7 +9,7 @@ var vard = 'index.html'
 
 jQuery('.window').html("<span id='text'><img width = '20' height = '20'"+
 "src='https://ih1.redbubble.net/image.428914186.0177/flat,800x800,075,f.u1.jpg'> &nbsp"+ 
-"C:Users\\Aj\\Desktop\\costelo01.github.io\\"+vard+" (costelo01.github.io) - Sublime Text (UNREGISTERED)</span>");
+"C:Users\\Aj\\Desktop\\costelo01.github.io\\<span id='varvar'>"+vard+"</span> (costelo01.github.io) - Sublime Text (UNREGISTERED)</span>");
 
 
 //dropdown menu
@@ -46,10 +46,11 @@ jQuery('.content').html('<div class = "parent" >'+
     'font-family: Trebuchet MS; text-transform: uppercase; font-size: 15px; cursor: context-menu;">Folders</span>'+
 '<div class="file-folder" style="z-index: -1;"></div>'+  //file folder
 '</div>'+
-'<div class = "child">'+
-'<div ><div class="code-content"></div></div>'+
+'<div class = "child"><span id="magic-tabs">ASDASASD</span></div>'+
 '</div>'+
 '</div>');
+
+
 
 
 
@@ -83,13 +84,8 @@ let properties = {  //hope I can use this somewhere
 		tabs : 4
 }
 
-let me_add_something = {	
-
-}
-
-let me_delete_something = {
-
-}
+var ah = $('textarea').height();
+var aw = $('textarea').width();
 
 let arrayLength = [[],[]]
 
@@ -136,6 +132,7 @@ const file_icons = {
   js : '<i class="fab fa-js"></i>',
   dotfiles : "",
   txtfiles : "",
+  ico: '<i class="far fa-image"></i>',
   png : '<i class="far fa-image"></i>',
   jpg : '<i class="far fa-image"></i>',
   html : '<i class="fas fa-code" style="font-size: 12px;"></i>',
@@ -148,8 +145,43 @@ const file_icons = {
 
 
 
+var func_ = function(a){
+
+   jQuery(a).on("click contextmenu", function(){
 
 
+        var lastClass = jQuery(this).attr('class').split(' ');
+
+        if(lastClass[3] == null){
+          jQuery('#varvar').text(jQuery(this).text().trim())
+        }
+        else{
+          jQuery('#varvar').text(lastClass[3]+"\\"+jQuery(this).text().trim())
+        }
+
+
+        
+         jQuery(this).css('background-color','#464743')
+         jQuery(a).not(this).css('background-color', '')
+
+
+    })
+}
+
+var funk_ = function(b, ar){
+
+   jQuery(b).on('contextmenu', function(){
+        jQuery(this).bind("contextmenu",function(event) { 
+          jQuery('.custom-menu').not(this).hide();
+          jQuery("<div class='custom-menu'></div>").append(ar)
+               .appendTo("body")
+               .css({top: event.pageY + "px", left: event.pageX + "px"});
+                func_(b)
+          }).bind("click" ,function(){
+              jQuery('.custom-menu').not(this).hide();           
+          })
+      })
+}
 //<---- SIDEBAR FUNCTIONS PART I !! ----->
 
 const function__ = {
@@ -173,26 +205,16 @@ const function__ = {
     }
 
       //Right click function for folders
+      funk_(arg, ar)
 
-      jQuery(arg).on('contextmenu', function(){
-        jQuery(this).bind("contextmenu",function(event) { 
-           jQuery('.custom-menu').not(this).hide();
-
-          //Got the code from this dude: https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app
-          
-          jQuery("<div class='custom-menu'></div>").append(ar)
-               .appendTo("body")
-               .css({top: event.pageY + "px", left: event.pageX + "px"});
-          }).bind("click" , function(){
-              jQuery('.custom-menu').not(this).hide();
-          })
-      })
   },
   file:  function(arg){
 
     jQuery("body").on("click", function(){
         jQuery('.custom-menu').hide()
     })
+
+    func_(arg)
 
     const ar = [];
 
@@ -201,29 +223,18 @@ const function__ = {
     }
 
       //Right click function for folders
+      funk_(arg, ar)
+      func_(arg)
 
-      jQuery(arg).on('contextmenu', function(){
 
-        jQuery(this).bind("contextmenu",function(event) { 
 
-          jQuery('.custom-menu').not(this).hide();
-          jQuery("<div class='custom-menu'></div>").append(ar)
-
-               .appendTo("body")
-               .css({top: event.pageY + "px", left: event.pageX + "px"});
-
-          }).bind("click" ,function(){
-
-              jQuery('.custom-menu').not(this).hide();
-
-          })
-      })
+      
   },
-  delete : function(){
+  me_add_something : function(){
 
 
   },
-  add : function(){
+  me_delete_something : function(){
 
 
   }
@@ -237,8 +248,13 @@ let folders_files = {
 
     "me" : {"school.js": "","achievements.php": "","life.html":""}, 
     "img" : {"baki.png": ""},
-    "css" : { },
-    "js_" : { }
+    "css" : {  },
+    "js_" : { },
+    "index.html" : { },
+    "404.html" : { },
+    "favicon.ico" : { },
+    "icon.png" : { },
+
 }
 
 // sort algo: https://stackoverflow.com/questions/5467129/sort-javascript-object-by-key
@@ -261,10 +277,11 @@ let ksort = function ( src ) {
 var spe_arrow_default = '▸';
 var spe_arrow_active = '▾';
 
-jQuery('<p class="binded-event mainfolder toggle"><span class="arrow" style="font-size: 18px;"></span>&nbsp<span class="icoo">'+file_icons.folder+'</span> &nbspcostelo01.github.io</p>').appendTo('.file-folder')
+jQuery('<p class="binded-event mainfolder toggle"><span class="arrow" style="font-size: 16px;"></span>&nbsp<span class="icoo">'+file_icons.folder+'</span> &nbspcostelo01.github.io</p>').appendTo('.file-folder')
 
 var c;
 var icon;
+var icon_;
 
 for(let i in ksort(folders_files)){
   const fol = []
@@ -284,19 +301,32 @@ for(let i in ksort(folders_files)){
           }
         }
     
-      fol.push('<div style="padding-left: 30px;"><p class="toggle subfolder bind-event '+i+'"><span class="">'+icon+'</span> &nbsp'+o+'<p></div>')
+      fol.push('<div><p class="toggle subfolder bind-event '+i+'" ><span style="padding-left: 30px;"><span><span class="">'+icon+'</span> &nbsp'+o+'<p></div>')
          
     }
 
-    jQuery('<p id="'+i+'" class="binded-event toggle subfolder"><span class="arrow" style="font-size: 18px;"></span>&nbsp<span class="icoo">'+file_icons.folder+'</span> &nbsp'+i+'</p>').appendTo('.file-folder')
-   
+
+    let ac = i.split('.')
+
+    if(ac[1] != null){
+
+        for(let something_else in file_icons){
+          if(ac[1]  == something_else){
+              icon_ = file_icons[something_else]
+          }
+        }
+      jQuery('<p class="bind-event toggle subfolder"><span class="">'+icon_+'</span> &nbsp'+i+'</p>').appendTo('.file-folder')
+    }
+    else{
+      jQuery('<p id="'+i+'" class="binded-event toggle subfolder"><span class="arrow" style="font-size: 16px;"></span>&nbsp<span class="icoo">'+file_icons.folder+'</span> &nbsp'+i+'</p>').appendTo('.file-folder')
+    }
+
+    
     jQuery('.file-folder').append(fol)
 
 }
 
 
-(jQuery('.toggle').is(':visible') || jQuery('.subfolder').is(':visible')) ? jQuery('.arrow').html(spe_arrow_active)  : jQuery('.arrow').html(spe_arrow_default)
-//(jQuery('.toggle').is(':visible') || jQuery('.subfolder').is(':visible')) ? jQuery('.icoo').html(file_icons.folder_o)  : jQuery('.icoo').html(file_icons.folder)    
 
 //(arrow^active) formatting    
 
@@ -340,5 +370,9 @@ function__.folder('.binded-event')
 function__.file('.bind-event')
 
 //<!--- end of sidebar functions part II --->
+
+//<! --- TEXTAREA EDITOR --- >
+
+jQuery('<textarea id="mylovelytexteditor">PREPARE FOR TROUBLE!!!!</textarea>').appendTo('.child')
 
 

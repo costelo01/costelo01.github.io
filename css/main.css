@@ -161,6 +161,21 @@ footer{
     margin-left: 200px;
     background: #272822;
 }
+
+textarea{
+    font-family: Segoe UI;
+    font-size: 12px;
+    color: white;
+    margin-top: 15px;
+    position: relative;
+    max-height: 100%;
+    height: 100%;
+    width: 100%;
+    background: #272822;
+}
+
+
+
 .window {
     margin-bottom: -1px;
     background-color: #f2eeea; 
@@ -239,7 +254,10 @@ li{
     display: inline-block;
 }
 
-
+.bind-event {
+    padding-bottom: 1.5px;
+    padding-top: 1.5px;
+}
 /*li:hover > .dropdown-content {display: block;}*/
 
 .line .line1 .line2 .line3 .line4 {margin: 0; padding: 0;}
@@ -260,7 +278,7 @@ hr {margin-right: 3px; margin-bottom: -22px; margin-top: -17px;}
 
 p {font-family: Segoe UI; font-size: 13px; color:#e5e5e0; text-transform: lowercase;
 font-weight: normal; background-color: transparent; border: 1px solid transparent; width: 200vh !important; 
-top: 0; bottom: 0; margin: 2px; padding-left: 30px; }
+top: 0; bottom: 0; margin: 2px; padding-left: 30px; margin: 0}
 
 p:hover {  cursor:context-menu; background-color: #272822; }
 
