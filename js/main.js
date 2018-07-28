@@ -1,5 +1,7 @@
 
 //First of all, I want to have my js optimized. So seperation-of-concern was not applied here...
+//I can make this code cleaner and better don't worry I just didn't put up to it, 
+// including all the strings in a single object like the rest or creating a config.
 // Cheers!
 
 var vard = 'index.html'
@@ -46,7 +48,19 @@ jQuery('.content').html('<div class = "parent" >'+
     'font-family: Trebuchet MS; text-transform: uppercase; font-size: 15px; cursor: context-menu;">Folders</span>'+
 '<div class="file-folder" style="z-index: -1;"></div>'+  //file folder
 '</div>'+
-'<div class = "child"><span id="magic-tabs">ASDASASD</span></div>'+
+
+
+
+//our custom tabs just like in sublime!
+'<div class = "child"><div id="magic-tabs"><div class="tab">'+
+ '<button class="tablinks" onclick="">index.html</button>'+
+ '<button class="tablinks" onclick="">baki.png</button>'+
+ '<button class="tablinks" onclick="">favicon.ico</button>'+
+'</div></div></div>'+
+
+
+
+
 '</div>'+
 '</div>');
 
@@ -163,6 +177,7 @@ var func_ = function(a){
         
          jQuery(this).css('background-color','#464743')
          jQuery(a).not(this).css('background-color', '')
+         jQuery('.binded-event').not(this).css('background-color', '')
 
 
     })
@@ -176,7 +191,12 @@ var funk_ = function(b, ar){
           jQuery("<div class='custom-menu'></div>").append(ar)
                .appendTo("body")
                .css({top: event.pageY + "px", left: event.pageX + "px"});
-                func_(b)
+                //func_(b)
+
+                 jQuery(this).css('background-color','#464743')
+                 jQuery(b).not(this).css('background-color', '')
+                 jQuery('.bind-event').not(this).css('background-color', '')
+
           }).bind("click" ,function(){
               jQuery('.custom-menu').not(this).hide();           
           })
@@ -277,14 +297,20 @@ let ksort = function ( src ) {
 var spe_arrow_default = '▸';
 var spe_arrow_active = '▾';
 
-jQuery('<p class="binded-event mainfolder toggle"><span class="arrow" style="font-size: 16px;"></span>&nbsp<span class="icoo">'+file_icons.folder+'</span> &nbspcostelo01.github.io</p>').appendTo('.file-folder')
+
+
+jQuery('<p class="binded-event mainfolder toggle"><span class="arrow" style="font-size: 16px;"></span>&nbsp<span class="icoo">'+file_icons.folder_o+'</span> &nbspcostelo01.github.io</p>').appendTo('.file-folder')
 
 var c;
 var icon;
 var icon_;
+var folly = []
 
 for(let i in ksort(folders_files)){
   const fol = []
+ 
+
+
   if (!folders_files.hasOwnProperty(i)) {
           continue;
   }
@@ -294,6 +320,7 @@ for(let i in ksort(folders_files)){
       if(o == null){
         continue;
       }
+
        var a = o.split('.')
         for(let something in file_icons){
           if(a[1] == something){
@@ -301,7 +328,7 @@ for(let i in ksort(folders_files)){
           }
         }
     
-      fol.push('<div><p class="toggle subfolder bind-event '+i+'" ><span style="padding-left: 30px;"><span><span class="">'+icon+'</span> &nbsp'+o+'<p></div>')
+      fol.push('<div><p class="toggle subfolder bind-event '+i+'" ><span style="padding-left: 30px;"><span><span class="icoon">'+icon+'</span> &nbsp'+o+'<p></div>')
          
     }
 
@@ -315,18 +342,20 @@ for(let i in ksort(folders_files)){
               icon_ = file_icons[something_else]
           }
         }
-      jQuery('<p class="bind-event toggle subfolder"><span class="">'+icon_+'</span> &nbsp'+i+'</p>').appendTo('.file-folder')
+        folly.push('<p class="bind-event toggle subfolder"><span style="padding-left: 18px;"><span class="icoon">'+icon_+'</span> &nbsp'+i+'</p>')
+      
     }
     else{
-      jQuery('<p id="'+i+'" class="binded-event toggle subfolder"><span class="arrow" style="font-size: 16px;"></span>&nbsp<span class="icoo">'+file_icons.folder+'</span> &nbsp'+i+'</p>').appendTo('.file-folder')
+      jQuery('<p id="'+i+'" class="binded-event toggle subfolder"><span class="arrow" style="font-size: 16px;"></span>&nbsp<span class="icoo">'+file_icons.folder_o+'</span> &nbsp'+i+'</p>').appendTo('.file-folder')
     }
 
     
     jQuery('.file-folder').append(fol)
-
+   
 }
 
-
+ jQuery('.file-folder').append(folly)
+ jQuery('.arrow').html(spe_arrow_active)
 
 //(arrow^active) formatting    
 
