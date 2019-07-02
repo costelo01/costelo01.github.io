@@ -153,7 +153,8 @@ const file_icons = {
   xml : '<i class="fas fa-code" style="font-size: 12px;"></i>',
   manifest: "",
   folder : '<i class="far fa-folder"></i>',
-  folder_o : '<i class="far fa-folder-open"></i>'
+  folder_o : '<i class="far fa-folder-open"></i>',
+  asd : '<img src="https://www.hackthebox.eu/badge/image/81581" alt="Hack The Box">'
   
 }
 
@@ -273,7 +274,7 @@ let folders_files = {
     "index.html" : { },
     "404.html" : { },
     "favicon.ico" : { },
-    "icon.png" : { },
+    "icon.png" : { }
 
 }
 
@@ -299,7 +300,7 @@ var spe_arrow_active = '▾';
 
 
 
-jQuery('<p class="binded-event mainfolder toggle"><span class="arrow" style="font-size: 16px;"></span>&nbsp<span class="icoo">'+file_icons.folder_o+'</span> &nbspcostelo01.github.io</p>').appendTo('.file-folder')
+jQuery('<img src="https://www.hackthebox.eu/badge/image/81581" alt="Hack The Box"><p class="binded-event mainfolder toggle"><span class="arrow" style="font-size: 16px;"></span>&nbsp<span class="icoo">'+file_icons.folder_o+'</span> &nbspcostelo01.github.io</p>').appendTo('.file-folder')
 
 var c;
 var icon;
