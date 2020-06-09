@@ -154,7 +154,8 @@ const file_icons = {
   manifest: "",
   folder : '<i class="far fa-folder"></i>',
   folder_o : '<i class="far fa-folder-open"></i>',
-  asd : '<img src="https://www.hackthebox.eu/badge/image/81581" alt="Hack The Box">'
+  asd : '<img src="https://www.hackthebox.eu/badge/image/81581" alt="Hack The Box">',
+  asb : '<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>'
   
 }
 
