@@ -301,7 +301,7 @@ var spe_arrow_active = '▾';
 
 
 
-jQuery('<img src="https://www.hackthebox.eu/badge/image/81581" alt="Hack The Box"><p class="binded-event mainfolder toggle"><span class="arrow" style="font-size: 16px;"></span>&nbsp<span class="icoo">'+file_icons.folder_o+'</span> &nbspcostelo01.github.io</p>').appendTo('.file-folder')
+jQuery('<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script><img src="https://www.hackthebox.eu/badge/image/81581" alt="Hack The Box"><p class="binded-event mainfolder toggle"><span class="arrow" style="font-size: 16px;"></span>&nbsp<span class="icoo">'+file_icons.folder_o+'</span> &nbspcostelo01.github.io</p>').appendTo('.file-folder')
 
 var c;
 var icon;
